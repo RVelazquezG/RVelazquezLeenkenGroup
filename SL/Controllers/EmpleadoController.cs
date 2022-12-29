@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,8 +10,9 @@ namespace SL.Controllers
     [ApiController]
     public class EmpleadoController : Controller
     {
-        // GET: api/<EmpleadoController>
-        [HttpGet("GetAll")]
+        [EnableCors("API")]
+        [Route("GetAll")]
+        [HttpGet]
         public IActionResult GetAll()
         {
             ML.Empleado empleado = new ML.Empleado();
@@ -28,7 +30,26 @@ namespace SL.Controllers
             }
         }
 
-        
+        [EnableCors("API")]
+        [Route("EstadoGetAll")]
+        [HttpGet]
+        public IActionResult EstadoGetAll()
+        {
+            ML.Estado estado = new ML.Estado();
+
+            ML.Result result = BL.Estado.GetAll();
+
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [EnableCors("API")]
         [HttpGet("GetByID{IdEmpleado}")]
         public IActionResult GetById(int IdEmpleado)
         {
@@ -43,6 +64,7 @@ namespace SL.Controllers
             }
         }
 
+        [EnableCors("API")]
         [HttpPost("Add")]
         public IActionResult Add([FromBody] ML.Empleado empleado)
         {
@@ -74,7 +96,7 @@ namespace SL.Controllers
             }
         }
 
-
+        [EnableCors("API")]
         [HttpDelete("Delete{IdEmpleado}")]
         public IActionResult Delete(int IdEmpleado)
         {

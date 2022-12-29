@@ -131,7 +131,8 @@ namespace BL
                             objEmpleado.ApellidoMaterno = obj.ApellidoMaterno;
 
                             objEmpleado.Estado = new ML.Estado();
-                            objEmpleado.IdEstado = int.Parse(obj.IdEstado.ToString());
+                            objEmpleado.Estado.IdEstado = int.Parse(obj.IdEstado.ToString());
+                            objEmpleado.Estado.Nombre = obj.NombreEstado;
 
                             result.Objects.Add(objEmpleado);
                         }
@@ -180,6 +181,7 @@ namespace BL
 
                             empleado.Estado = new ML.Estado();
                             empleado.Estado.IdEstado = int.Parse(objEmpleado.IdEstado.ToString());
+                            empleado.Estado.Nombre = objEmpleado.NombreEstado;
                             result.Object = empleado;
 
                             result.Correct = true;

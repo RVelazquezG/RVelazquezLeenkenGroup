@@ -13,8 +13,7 @@ namespace ML
         public string Nombre { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
-        public int IdEstado { get; set; }
-
+        public List<object> Empleados { get; set; }
         public ML.Estado Estado { get; set; }   
     }
 }

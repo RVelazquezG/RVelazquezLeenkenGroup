@@ -3,31 +3,117 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>GetAll</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Empleados</h2>
+            <hr />
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="~/js/Empleado.js"></script>
 
-
 <div class="container">
+
+
     <div class="row">
-        <div class="col-md-12">
-            <table id="tblEmpleado" class="table table-hover">
+        <div class="col-md-10">
+
+            </div>
+        <div class="col-md-1" style="padding-left:100px">
+            <button type="button" class=" btn btn-success" id="btnAdd" onclick="ShowModal()">Agregar</button>
+        </div>
+    </div>
+
+    <hr />
+            <table id="tblEmpleado" class="table table-hover" border="1">
                 <thead>
                     <tr>
-                        <th>Editar</th>
-                        <th>IdEmpleado</th>
-                        <th>Numero Nomina</th>
-                        <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-                        <th>Estado</th>
-                        <th>Eliminar</th>
+                        <th class="text-center" scope="col">Editar</th>
+                        <th class="text-center" scope="col">IdEmpleado</th>
+                        <th class="text-center" scope="col">Numero Nomina</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Apellido Paterno</th>
+                        <th class="text-center" scope="col">Apellido Materno</th>
+                        <th class="text-center" scope="col">IdEstado</th>
+                        <th class="text-center" scope="col">Nombre Estado</th>
+                        <th class="text-center" scope="col">Eliminar</th>
                     </tr>
-
                 </thead>
                 <tbody> </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Agregar/Actualizar empleado</h4>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Id Empleado:</label>
+                        <input type="text" class="form-control" id="txtIdEmpleado" placeholder="Id Empleado" @*disabled="disabled"*@ />
+                    </div>
+                    <div class="form-group">
+                        <label>Numero Nomina:</label>
+                        <input type="text" class="form-control" id="txtNumeroNomina" placeholder="Numero Nomina" @*disabled="disabled"*@ />
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" />
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Paterno:</label>
+                        <input type="text" class="form-control" id="txtApellidoPaterno" placeholder="Apellido Paterno" />
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Materno:</label>
+                        <input type="text" class="form-control" id="txtApellidoMaterno" placeholder="Apellido Materno" />
+                    </div>
+                     <div class="form-group">
+                            <label>Estado:</label>
+                            <select class="form-control" name="ddlEstados" id="ddlEstados"></select>
+                        </div>         
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btnGuardar" onclick="Guardar()">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detalle</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>
+                                Acción completada con éxito
+                            </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" value="Regresar" data-dismiss="modal">Entendido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

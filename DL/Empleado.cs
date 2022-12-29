@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 
 namespace DL;
 
@@ -16,6 +17,8 @@ public partial class Empleado
     public string? ApellidoMaterno { get; set; }
 
     public int? IdEstado { get; set; }
+
+    public string? NombreEstado { get; set; }
 
     public virtual Estado? IdEstadoNavigation { get; set; }
 }
