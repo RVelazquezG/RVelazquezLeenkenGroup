@@ -97,16 +97,20 @@ function InitializeControls() {
 function Guardar() {
 
     var empleado = {
-        idEmpleado: $('#txtIdEmpleado').val(),
-        numeroNomina: $('#txtNumeroNomina').val(),
+        idEmpleado: $('#txtIdEmpleado').val(), ,
+        numeroNomina: '',
         nombre: $('#txtNombre').val(),
         apellidoPaterno: $('#txtApellidoPaterno').val(),
         apellidoMaterno: $('#txtApellidoMaterno').val(),
         estado: {
-            idEstado: $('#ddlEstados').val()
-        }
+            idEstado: $('#ddlEstados').val(),
+            nombre: '',
+            estados: []
+        },
+        empleados: []
     }
-    if (empleado.idEmpleado == "") {
+    if ($('#txtApellidoPaterno').val() == "") {
+        empleado.idEmpleado = 0,
         Add(empleado);
     }
     else {
@@ -132,3 +136,45 @@ function Eliminar(idEmpleado) {
     };
 };
 
+function GetById(idEmpleado) {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:5125/api/Empleado/GetById' + idEmpleado,
+        success: function (result) {
+            $('#txtIdEmpleado').val(result.object.idEmpleado);
+            $('#txtNumeroNomina').val(result.object.numeroNomina);
+            $('#txtNombre').val(result.object.nombre);
+            $('#txtApellidoPaterno').val(result.object.apellidoPaterno);
+            $('#txtApellidoMaterno').val(result.object.apellidoMaterno);
+            $('#ddlEstados').val(result.object.estado.idEstado);
+
+            $('#ModalUpdate').modal('show');
+        },
+        error: function (result) {
+            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+        }
+
+
+    });
+
+}
+
+function Update(empleado) {
+
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:5125/api/Empleado/Update',
+        datatype: 'json',
+        data: JSON.stringify(empleado),
+        contentType: 'application/json; charset=utf-8',
+        success: function (result) {
+            $('#myModal').modal();
+            $('#ModalUpdate').modal('hide');
+            GetAll();
+        },
+        error: function (result) {
+            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+        }
+    });
+
+};

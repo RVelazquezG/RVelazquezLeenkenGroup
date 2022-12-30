@@ -80,8 +80,10 @@ namespace SL.Controllers
             }
         }
 
-        [HttpPost("Update/{IdEmpleado}")]
-        public IActionResult Put(int IdEmpleado, [FromBody] ML.Empleado empleado)
+        [EnableCors("API")]
+        [Route("Update")]
+        [HttpPost]
+        public IActionResult Post(int IdEmpleado, [FromBody] ML.Empleado empleado)
         {
             empleado.IdEmpleado = IdEmpleado;
 
